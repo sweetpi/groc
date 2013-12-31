@@ -42,6 +42,8 @@ module.exports = DOC_TAGS =
   destructor:
     section:     'special'
 
+  'class':
+    section:     'type'
   constant:
     section:     'type'
   method:
@@ -227,7 +229,7 @@ module.exports = DOC_TAGS =
       fragments.push "has a default value of #{value.defaultValue}" if value.defaultValue?
 
       "#{if value.isSubParam then "    *" else "*"} **#{value.varName} #{humanize.joinSentence fragments}.**#{if value.description.length then '<br/>(' else ''}#{value.description}#{if value.description.length then ')' else ''}"
-  
+  properties: 'property'
 
   'return':
     section:     'returns'

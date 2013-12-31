@@ -147,6 +147,10 @@ module.exports = class Default extends Base
         output += 'Parameters:\n\n'
         output += "#{tag.markdown}\n\n" for tag in sections.params
 
+      if sections.properties?
+        output += 'Properties:\n\n'
+        output += "#{tag.markdown}\n\n" for tag in sections.properties
+
       if sections.returns?
         output += (humanize.capitalize(tag.markdown) for tag in sections.returns if sections.returns?).join('<br/>**and** ')
 
