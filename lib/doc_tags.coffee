@@ -140,7 +140,9 @@ module.exports = DOC_TAGS =
     # @param  {Boolean}  value.isSubParam=false
     # @param  {String}   [value.defaultValue]
     # @param  {String}   [value.description]
-    #
+    # 
+    # @property {Object} value The value used.
+    # 
     # @return {String} should be in markdown syntax
     markdown:    (value) ->
       types = (
