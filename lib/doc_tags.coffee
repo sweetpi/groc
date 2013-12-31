@@ -177,6 +177,56 @@ module.exports = DOC_TAGS =
   params:        'param'
   parameters:    'param'
 
+  property:
+    section:     'properties'
+    # parses class properties
+    #
+    # @public
+    # @method parseValue
+    #
+    # @param  {String} value Text that follows @param
+    #
+    # @return {Object}
+    parseValue:  (value) ->
+      parts = collapse_space(value).match /^\{([^\}]+)\}\s+(\[?)([\w\.\$]+)(?:=([^\s\]]+))?(\]?)\s*(.*)$/
+      types:        (parts[1]?.split /\|{1,2}/g)
+      hasDefaultValue:   (parts[2] == '[' and parts[5] == ']')
+      varName:      parts[3]
+      isSubParam:   /\./.test parts[3]
+      defaultValue: parts[4]
+      description:  parts[6]
+
+    # converts parsed values to markdown text
+    #
+    # @private
+    # @method markdown
+    #
+    # @param  {Object}   value
+    # @param  {String[]} value.types
+    # @param  {Boolean}  value.hasDefaultValue=false
+    # @param  {String}   value.varName
+    # @param  {Boolean}  value.isSubParam=false
+    # @param  {String}   [value.defaultValue]
+    # @param  {String}   [value.description]
+    #
+    # @return {String} should be in markdown syntax
+    markdown:    (value) ->
+      types = (
+        for type in value.types
+          if type.match /\[\]$/
+            "an Array of #{humanize.pluralize type.replace(/\[\]$/, "")}"
+          else
+            "#{humanize.article type} #{type}"
+      )
+
+      fragments = []
+      
+      fragments.push "is #{humanize.joinSentence types, 'or'}"
+      fragments.push "has a default value of #{value.defaultValue}" if value.defaultValue?
+
+      "#{if value.isSubParam then "    *" else "*"} **#{value.varName} #{humanize.joinSentence fragments}.**#{if value.description.length then '<br/>(' else ''}#{value.description}#{if value.description.length then ')' else ''}"
+  
+
   'return':
     section:     'returns'
     parseValue:  (value) ->
