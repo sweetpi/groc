@@ -220,7 +220,7 @@ module.exports = DOC_TAGS =
           if type.match /\[\]$/
             "an Array of #{humanize.pluralize type.replace(/\[\]$/, "")}"
           else
-            "#{humanize.article type} #{type}"
+            " #{type}"
       )
 
       fragments = []
