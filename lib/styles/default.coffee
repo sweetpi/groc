@@ -8,6 +8,7 @@ jade         = require 'jade'
 uglifyJs     = require 'uglify-js'
 humanize     = require '../utils/humanize'
 Base = require './base'
+TagsTemplate = require './doc_tags_template'
 
 
 module.exports = class Default extends Base

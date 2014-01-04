@@ -96,6 +96,11 @@ module.exports = DOC_TAGS =
     section:     'todo'
     markdown:    'TODO: {value}'
 
+  depricated:    
+    section:     'todo'
+    markdown:    'Depricated: {value}'
+
+
   example:
     section:     'example'
     markdown:    '{value}'
