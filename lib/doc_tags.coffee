@@ -96,9 +96,9 @@ module.exports = DOC_TAGS =
     section:     'todo'
     markdown:    'TODO: {value}'
 
-  depricated:    
+  deprecated:    
     section:     'todo'
-    markdown:    'Depricated: {value}'
+    markdown:    'Deprecated: {value}'
 
 
   example:
