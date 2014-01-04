@@ -1,6 +1,6 @@
 template = (segments) ->
   for segment, segmentIndex in segments when segment.tagSections?
-	sections = segment.tagSections
+    sections = segment.tagSections
     output = ''
 	metaOutput = ''
 	accessClasses = 'doc-section'
@@ -46,7 +46,4 @@ template = (segments) ->
 
 	segment.comments = output.split '\n'
 
-
 module.exports = template
-
-
