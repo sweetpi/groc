@@ -13,6 +13,7 @@ module.exports = class Base
     @log     = project.log
     @files   = []
     @outline = {} # Keyed on target path
+    @links = project.links
 
   renderFile: (data, fileInfo, callback) ->
     @log.trace 'BaseStyle#renderFile(..., %j, ...)', fileInfo

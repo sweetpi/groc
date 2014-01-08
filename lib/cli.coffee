@@ -138,6 +138,9 @@ module.exports = CLI = (inputArgs, callback) ->
    'very-verbose':
       describe: "Hey, you asked for it."
 
+    links:
+      describe: "Additional Links to display"
+      type: 'object'
 
   # ## Argument processing
 
@@ -208,6 +211,8 @@ module.exports = CLI = (inputArgs, callback) ->
   project.index = argv.index
   project.files = (f for f of files)
   project.stripPrefixes = argv.strip
+  console.log argv
+  project.links = argv.links
 
   # `Project#generate` can take some options, such as which style to use.  Since we're generating
   # differently depending on whether or not github is enabled, let's set those up now:
@@ -217,8 +222,15 @@ module.exports = CLI = (inputArgs, callback) ->
 
   # Good to go!
   unless argv.github
-    project.generate options, (error) ->
-      callback error
+    CLIHelpers.guessPrimaryGitHubURL argv['repository-url'], (error, url, remote) ->
+
+      if error
+        project.log.error error.message
+        return callback error
+
+      project.githubURL = url
+      project.generate options, (error) ->
+        callback error
 
   # ## GitHub
   else

@@ -31,6 +31,7 @@ module.exports = class Project
     #   documentation.  For example, this could be used to ensure that `lib/some/source.file` maps
     #   to `doc/some/source.file` and not `doc/lib/some/source.file`.
     @stripPrefixes = []
+    @links = []
 
   # Annoyingly, we seem to be hitting a race condition within Node 0.10's
   # emulation for old-style streams.  For now, we're dropping concurrent doc

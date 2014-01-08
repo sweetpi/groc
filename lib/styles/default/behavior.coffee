@@ -1,5 +1,5 @@
 tableOfContents = <%= JSON.stringify(tableOfContents) %>
-
+links = <%= links %>
 # # Page Behavior
 
 # ## Table of Contents
@@ -185,6 +185,23 @@ buildNav = (metaInfo) ->
     </nav>
   """).appendTo $('body')
   toc$ = nav$.find '.toc'
+
+  select = """
+    <li class="github">
+      <select id="links">
+  """
+  for link, a of links
+    select += """<option value="#{link}">#{link}</option>""" 
+  select += """
+      </select>
+    </li>
+  """
+
+  nav$.find('.tools').prepend select
+
+  nav$.find('#links').on 'change', ->
+    option$ = $ this
+    document.location = metaInfo.relativeRoot + links[option$.val()]
 
   if metaInfo.githubURL
     # Special case the index to go to the project root
