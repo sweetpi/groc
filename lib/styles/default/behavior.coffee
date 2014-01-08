@@ -189,6 +189,7 @@ buildNav = (metaInfo) ->
   select = """
     <li class="github">
       <select id="links">
+        <option value="">Jump to...</option>
   """
   for link, a of links
     select += """<option value="#{link}">#{link}</option>""" 
@@ -201,7 +202,10 @@ buildNav = (metaInfo) ->
 
   nav$.find('#links').on 'change', ->
     option$ = $ this
-    document.location = metaInfo.relativeRoot + links[option$.val()]
+    val = option$.val()
+    if val is "" then return
+    path = metaInfo.relativeRoot + links[val]
+    document.location.href = path
 
   if metaInfo.githubURL
     # Special case the index to go to the project root
