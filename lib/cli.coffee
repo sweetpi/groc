@@ -211,7 +211,6 @@ module.exports = CLI = (inputArgs, callback) ->
   project.index = argv.index
   project.files = (f for f of files)
   project.stripPrefixes = argv.strip
-  console.log argv
   project.links = argv.links
 
   # `Project#generate` can take some options, such as which style to use.  Since we're generating
