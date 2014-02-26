@@ -79,10 +79,19 @@ module.exports = class Base
         segment.highlightedCode    = Utils.trimBlankLines segment.highlightedCode
         segment.foldMarker         = Utils.trimBlankLines(segment.foldMarker || '')
 
+      title = null
+      for s in segments
+        if s.headers?
+          for h in s.headers
+            if h.isFileHeader
+              title = h.title
+          
+      title = if title? then title else fileInfo.pageTitle
       templateContext =
         project:     @project
         segments:    segments
-        pageTitle:   fileInfo.pageTitle
+        pageTitle:   title
+        pageOrder:   @files.length
         sourcePath:  fileInfo.sourcePath
         targetPath:  fileInfo.targetPath
         projectPath: fileInfo.projectPath

@@ -658,7 +658,7 @@ module.exports = Utils =
 
           headers.push header
 
-          "<h#{header.level} id=\"#{header.slug}\">#{header.title}</h#{header.level}>"
+          "<a name=\"#{header.slug}\"><h#{header.level} id=\"#{header.slug}\">#{header.title}</h#{header.level}></a>"
 
         # We attach the rendered markdown to the comment
         segment.markdownedComments = markdown
